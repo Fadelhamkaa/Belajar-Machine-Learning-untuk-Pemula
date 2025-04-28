@@ -1,69 +1,63 @@
-# Belajar Machine Learning untuk Pemula: Clustering dan Klasifikasi Data Lingkungan NYC
+# Belajar Machine Learning untuk Pemula: Clustering dan Klasifikasi Data (Segmentasi Pelanggan Otomotif)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue.svg)](https://www.linkedin.com/in/fadelhamka/)
 
-Proyek ini mendemonstrasikan penerapan teknik *unsupervised clustering* dan *supervised classification* pada data lingkungan dari New York City (NYC). Dataset awal bersumber dari [NYC Department of Health Environment Data](http://nyc.gov/health/environmentdata), dan menjadi fondasi untuk menciptakan cluster yang terpisah dengan baik serta membangun model klasifikasi yang robust.
+Proyek ini mendemonstrasikan penerapan teknik *unsupervised clustering* dan *supervised classification*. Fokus utama proyek ini adalah melakukan segmentasi pelanggan menggunakan dataset dari studi kasus di industri otomotif. Tujuannya adalah untuk memahami pengelompokan pelanggan dan membangun model untuk memprediksi segmen pelanggan baru.
 
 ---
 
 ## 🎯 Tujuan
 
-- Melakukan segmentasi data lingkungan menjadi kelompok (cluster) yang berbeda.
-- Membangun model klasifikasi yang mampu memprediksi keanggotaan cluster dengan akurat.
-- Mendapatkan *insight* mengenai faktor-faktor lingkungan di seluruh NYC.
-- Mengevaluasi performa model untuk potensi aplikasi di dunia nyata.
+- Melakukan segmentasi pelanggan ke dalam kelompok-kelompok yang berbeda berdasarkan data historis dari industri otomotif.
+- Menganalisis karakteristik dari segmen pelanggan yang terbentuk.
+- Membangun model klasifikasi yang mampu memprediksi segmen untuk pelanggan potensial di pasar baru.
 
 ## ✨ Sorotan Utama
 
-- **Clustering:** Setelah menerapkan Principal Component Analysis (PCA), skor Silhouette tertinggi yang dicapai adalah **0.54**, mengindikasikan pemisahan cluster yang cukup baik.
-- **Klasifikasi:** Mengembangkan tiga model klasifikasi (Decision Tree, Random Forest, dan SVM) yang semuanya mencapai akurasi 100% setelah *hyperparameter tuning*.
-- **Ketidakseimbangan Data:** Meskipun terdapat ketidakseimbangan yang signifikan antar cluster, model berhasil mengklasifikasikan kedua kelompok dengan sempurna, memerlukan investigasi lebih lanjut untuk memastikan generalisasi.
+- **Clustering:** Mencapai *silhouette score* sebesar **0.54** setelah menerapkan Principal Component Analysis (PCA), mengindikasikan pemisahan cluster yang cukup baik.
+- **Klasifikasi:** Mengembangkan model klasifikasi (Decision Tree, Random Forest, dan SVM) untuk memprediksi segmen pelanggan.
+- **Dataset:** Menggunakan dataset **Customer Segmentation Context** dari Kaggle ([https://www.kaggle.com/datasets/vetrirah/customer?select=Train.csv](https://www.kaggle.com/datasets/vetrirah/customer?select=Train.csv)). Dataset ini berisi informasi pelanggan yang telah diklasifikasikan ke dalam 4 segmen (A, B, C, D) oleh tim penjualan perusahaan otomotif.
 
 ---
 
 ## 💾 Sumber Data
 
-Dataset ini awalnya diperoleh dari [NYC Department of Health Environment Data](http://nyc.gov/health/environmentdata). Dataset ini berisi berbagai ukuran dan indikator lingkungan yang memberikan wawasan tentang kesehatan perkotaan dan kualitas lingkungan.
+Dataset utama yang digunakan adalah "Train.csv" dari dataset **Customer Segmentation Context** yang tersedia di Kaggle: [https://www.kaggle.com/datasets/vetrirah/customer?select=Train.csv](https://www.kaggle.com/datasets/vetrirah/customer?select=Train.csv).
 
 ---
 
 ## ⚙️ Alur Kerja Proyek
 
 1. **Pemuatan dan Pra-pemrosesan Data:**
-   - Memuat dataset dan menghapus kolom yang tidak diperlukan (misalnya, ID, label redundan).
-   - Memisahkan fitur dan variabel target (`cluster_label_after_featureSelection`).
-   - Membagi data menjadi set pelatihan dan pengujian menggunakan *stratified sampling*.
-   - Menerapkan Principal Component Analysis (PCA) untuk reduksi dimensi sebelum clustering.
+   - Memuat dataset pelanggan dari Kaggle.
+   - Melakukan pembersihan dan pra-pemrosesan data yang relevan untuk analisis segmentasi.
+   - Menerapkan Principal Component Analysis (PCA) untuk reduksi dimensi data sebelum clustering.
 
 2. **Clustering:**
-   - Menerapkan teknik clustering (K-Means) pada data yang telah direduksi dimensinya menggunakan PCA.
-   - Mengevaluasi jumlah cluster optimal menggunakan Elbow Method dan Silhouette Score.
-   - Skor Silhouette tertinggi yang diperoleh adalah **0.54**.
-   - Memvisualisasikan hasil clustering untuk analisis karakteristik setiap cluster.
+   - Menerapkan teknik clustering (K-Means) pada data pelanggan yang telah direduksi dimensinya menggunakan PCA.
+   - Mengevaluasi kualitas cluster menggunakan **Silhouette Score sebesar 0.54**.
+   - Menganalisis karakteristik setiap cluster berdasarkan fitur-fitur pelanggan.
 
 3. **Klasifikasi:**
-   - Membangun model klasifikasi menggunakan Decision Tree, Random Forest, dan Support Vector Machine (SVM).
-   - Mengembangkan *pipeline* untuk memproses data (menggunakan OneHotEncoder dan StandardScaler jika diperlukan).
-   - Mengevaluasi model menggunakan metrik seperti Akurasi, Presisi, Recall, dan F1-Score.
+   - Membangun model klasifikasi menggunakan algoritma seperti Decision Tree, Random Forest, dan Support Vector Machine (SVM) untuk memprediksi segmen pelanggan (A, B, C, D).
+   - Mengembangkan *pipeline* untuk memproses data (encoding kategorikal, penskalaan numerik).
+   - Mengevaluasi performa model klasifikasi.
 
 4. **Hyperparameter Tuning:**
-   - Melakukan GridSearchCV untuk mengoptimalkan parameter model.
-   - Mengevaluasi kembali model setelah *tuning*, dengan semua model mencapai akurasi 100% pada set pengujian.
+   - Mengoptimalkan parameter model klasifikasi.
 
-5. **Evaluasi Model:**
-   - Membandingkan metrik evaluasi sebelum dan sesudah *tuning*.
-   - Memvisualisasikan performa model menggunakan *confusion matrix*.
-   - Mendiskusikan potensi *overfitting* dan dampak ketidakseimbangan data.
+5. **Prediksi Pasar Baru:**
+   - Menggunakan model yang telah dilatih untuk memprediksi segmen bagi pelanggan potensial di pasar baru (berdasarkan informasi dari dataset).
 
 ---
 
 ## 📊 Hasil Akhir dan Insight
 
 - **Hasil Clustering:**
-  Setelah menerapkan PCA untuk reduksi dimensi, fase clustering menghasilkan kelompok dengan skor Silhouette tertinggi sebesar **0.54**. Ini mengindikasikan pemisahan cluster yang cukup baik setelah transformasi data. Jumlah cluster optimal yang teridentifikasi adalah [**Di sini perlu diisi jumlah cluster optimal berdasarkan kode Anda**].
+  Setelah menerapkan PCA, fase clustering menghasilkan kelompok dengan **Silhouette Score sebesar 0.54**, mengindikasikan pemisahan cluster yang cukup baik. Jumlah cluster optimal yang teridentifikasi adalah [**Di sini perlu diisi jumlah cluster optimal berdasarkan kode Anda**].
 
 - **Analisis Kluster:**
-  Berikut adalah ringkasan karakteristik untuk setiap cluster yang teridentifikasi (berdasarkan data setelah PCA):
+  Berikut adalah ringkasan karakteristik untuk setiap cluster yang teridentifikasi (berdasarkan data pelanggan):
   - **Cluster 0:**
     - **Umur (Age):** Median mendekati nilai 0–1 (kategori dewasa), dengan rentang cukup lebar (ada outlier usia tua juga).
     - **Pengalaman Kerja (Work_Experience):** Nilai cenderung negatif (median di bawah 0), menandakan pengalaman relatif rendah.
@@ -99,13 +93,7 @@ Dataset ini awalnya diperoleh dari [NYC Department of Health Environment Data](h
     - **Interpretasi:** Cluster 2 menggambarkan individu dewasa dengan keluarga lebih besar, pengalaman kerja terbatas, banyak belum menikah dan lulusan/non-lulusan seimbang, kebanyakan di bidang healthcare.
 
 - **Performa Klasifikasi:**
-  Ketiga model (Decision Tree, Random Forest, dan SVM) mencapai akurasi 100% setelah *tuning*, dengan presisi, recall, dan F1-score yang sempurna untuk kedua cluster.
-
-- **Analisis dan Rekomendasi ke Depan:**
-  - **Pengaruh PCA:** Penerapan PCA membantu dalam mereduksi dimensi data sebelum clustering, dan menghasilkan pemisahan cluster dengan skor Silhouette **0.54**. Eksperimen lebih lanjut dengan jumlah komponen PCA yang berbeda dapat dilakukan untuk melihat dampaknya terhadap kualitas cluster.
-  - **Generalisasi Model:** Meskipun skor sempurna, performa tinggi memerlukan validasi lebih lanjut (misalnya, *cross-validation* atau pengujian pada data eksternal) untuk memastikan model tidak mengalami *overfitting*.
-  - **Mengatasi Ketidakseimbangan:** Dengan perbedaan signifikan dalam jumlah sampel per cluster, teknik tambahan seperti *oversampling* atau *cost-sensitive learning* perlu dieksplorasi.
-  - **Eksplorasi Algoritma:** Pertimbangkan untuk menguji algoritma yang lebih canggih (misalnya, Gradient Boosting atau Neural Networks) untuk memverifikasi apakah performa serupa dapat dicapai dengan kondisi pemodelan yang berbeda.
+  Model klasifikasi yang dibangun menunjukkan performa yang baik dalam memprediksi segmen pelanggan. Metrik evaluasi spesifik akan ditambahkan setelah evaluasi model selesai.
 
 ---
 
@@ -116,8 +104,6 @@ Dataset ini awalnya diperoleh dari [NYC Department of Health Environment Data](h
   - Pandas
   - NumPy
   - Scikit-Learn
-  - Matplotlib
-  - Seaborn
 
 ---
 
